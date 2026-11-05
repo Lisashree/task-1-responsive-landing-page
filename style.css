@@ -1,0 +1,385 @@
+/*==========================================================
+   Responsive landing page: mobile-first
+   Base styles = small screens. Media queries add layout
+   as the screen gets wider.
+   ========================================================== */
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+  --ink: #14182b;
+  --paper: #f6f8fc;
+  --cobalt: #2a45f5;
+  --sun: #ffc83d;
+  --mist: #e3e9f6;
+  --muted: #4b5472;
+
+}
+  
+/* ---------- 2. Reset and base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* padding and border stay inside the width */
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* stops the sticky header covering anchors */
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  line-height: 1.1;
+  margin: 0;
+}
+
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; }
+
+.container {
+  width: min(100% - 2 * var(--space), 68rem);
+  margin-inline: auto;
+}
+
+:focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 3px;
+}
+
+/* Visually hidden but still read by screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  padding: 0.5rem 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 8px;
+  z-index: 100;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- 3. Header (Flexbox) ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
+  border-bottom: 1px solid var(--mist);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 4rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: var(--cobalt);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+/* Mobile menu: the checkbox is hidden, the label is the button */
+.nav-toggle {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.nav-toggle-label {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.bars,
+.bars::before,
+.bars::after {
+  display: block;
+  width: 1.4rem;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.2s, background 0.2s;
+}
+.bars { position: relative; }
+.bars::before, .bars::after { content: ""; position: absolute; left: 0; }
+.bars::before { top: -7px; }
+.bars::after  { top: 7px; }
+
+/* Turn the bars into an X when the menu is open */
+.nav-toggle:checked + .nav-toggle-label .bars { background: transparent; }
+.nav-toggle:checked + .nav-toggle-label .bars::before { transform: translateY(7px) rotate(45deg); }
+.nav-toggle:checked + .nav-toggle-label .bars::after  { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-toggle:focus-visible + .nav-toggle-label {
+  outline: 3px solid var(--cobalt);
+}
+
+/* Small screens: nav is a dropdown panel, hidden until toggled */
+.site-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--mist);
+  padding: 0.5rem var(--space) 1rem;
+}
+.nav-toggle:checked ~ .site-nav { display: block; }
+
+.site-nav a {
+  display: block;
+  padding: 0.75rem 0;
+  text-decoration: none;
+  font-weight: 500;
+}
+.site-nav a:hover { color: var(--cobalt); }
+
+/* ---------- 4. Hero (Grid) ---------- */
+.hero {
+  padding-block: clamp(3rem, 10vw, 6rem);
+}
+
+.hero-inner {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.hero-copy p {
+  margin-top: 1.25rem;
+  max-width: 52ch;
+  font-size: 1.15rem;
+  color: var(--muted);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+/* ---------- 5. Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-primary {
+  background: var(--cobalt);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--ink); }
+
+.btn-ghost {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+/* ---------- 6. Hero visual: a page layout drawn with Grid ---------- */
+.browser {
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 8px 8px 0 var(--sun);
+}
+
+.browser-bar {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.7rem 1rem;
+  background: var(--ink);
+}
+.browser-bar span {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--mist);
+}
+
+.browser-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "header header header"
+    "hero   hero   hero"
+    "a      b      c"
+    "footer footer footer";
+  gap: 0.6rem;
+  padding: 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.browser-body > div {
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.b-header { grid-area: header; background: var(--mist); }
+.b-hero   { grid-area: hero; background: var(--cobalt); color: #fff; min-height: 6rem; }
+.b-card:nth-of-type(3) { grid-area: a; }
+.b-card:nth-of-type(4) { grid-area: b; }
+.b-card:nth-of-type(5) { grid-area: c; }
+.b-card   { background: var(--sun); min-height: 3.5rem; }
+.b-footer { grid-area: footer; background: var(--ink); color: var(--paper); }
+
+/* ---------- 7. Features section (auto-fit Grid) ---------- */
+.skills {
+  padding-block: clamp(3rem, 8vw, 5rem);
+  background: #fff;
+  border-block: 1px solid var(--mist);
+}
+
+.skills h2 {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  margin-bottom: 2rem;
+}
+
+.skills-grid {
+  display: grid;
+  /* As many columns as fit, each at least 15rem wide: responsive with no media query */
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.25rem;
+}
+
+.skill {
+  padding: 1.5rem;
+  background: var(--paper);
+  border: 1px solid var(--mist);
+  border-left: 5px solid var(--cobalt);
+  border-radius: var(--radius);
+}
+.skill h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.skill p  { color: var(--muted); }
+
+/* ---------- 8. Footer (Flexbox) ---------- */
+.site-footer {
+  padding-block: 2rem;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.social a {
+  display: inline-block;
+  padding: 0.5rem 1.1rem;
+  border: 1.5px solid var(--mist);
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+.social a:hover { background: var(--sun); border-color: var(--sun); color: var(--ink); }
+.social a:focus-visible { outline-color: var(--sun); }
+
+/* ==========================================================
+   MEDIA QUERIES: add layout as the screen gets wider
+   ========================================================== */
+
+/* Tablet and up: show the full nav, hide the menu button */
+@media (min-width: 48em) { /* 768px */
+  .nav-toggle-label { display: none; }
+
+  .site-nav {
+    display: block;
+    position: static;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  .site-nav ul { display: flex; gap: 2rem; }
+  .site-nav a { padding: 0.5rem 0; }
+
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+/* Laptop and up: hero copy and visual sit side by side */
+@media (min-width: 62em) { /* 992px */
+  .hero-inner {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+  }
+}
+
+/* Respect people who turn off animations */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}

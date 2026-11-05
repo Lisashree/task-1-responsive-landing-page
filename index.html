@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lisa Shree | Web Developer in Training</title>
+  <meta name="description" content="A responsive landing page built with HTML5 and CSS3 (Flexbox, Grid and media queries).">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- HEADER: logo + navigatio…  <!-- HEADER: logo + navigation -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#top" aria-label="Lisa Shree, back to top">
+        <span class="logo-mark">LS</span>
+        <span class="logo-text">Lisa Shree</span>
+      </a>
+
+      <!-- CSS-only menu toggle: the checkbox must come before the nav -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-toggle-label">
+        <span class="sr-only">Toggle menu</span>
+        <span class="bars" aria-hidden="true"></span>
+      </label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="#top">Home</a></li>
+          <li><a href="#skills">What's inside</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+ </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO: heading, paragraph, call-to-action -->
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>Websites that fit every screen.</h1>
+          <p>
+            I'm Lisa, an IT student learning to build clean, responsive pages with
+            HTML and CSS. This page is my first internship task. Resize your
+            window and watch the layout adapt.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#skills">See how it's built</a>
+            <a class="btn btn-ghost" href="#contact">Say hello</a>
+          </div>
+        </div>
+
+        <!-- Decorative page-layout sketch, drawn with CSS Grid -->
+        <div class="hero-visual" aria-hidden="true">
+          <div class="browser">
+            <div class="browser-bar"><span></span><span></span><span></span></div>
+            <div class="browser-body">
+              <div class="b-header">header</div>
+              <div class="b-hero">hero</div>
+              <div class="b-card">card</div>
+              <div class="b-card">card</div>
+              <div class="b-card">card</div>
+              <div class="b-footer">footer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES: a responsive Grid of cards -->
+    <section class="skills" id="skills">
+      <div class="container">
+        <h2>What's inside this page</h2>
+        <div class="skills-grid">
+          <article class="skill">
+            <h3>Semantic HTML</h3>
+            <p>Header, nav, main, section, article and footer tell browsers and screen readers what each part is for.</p>
+          </article>
+          <article class="skill">
+            <h3>Flexbox and Grid</h3>
+            <p>Flexbox lines up the navigation, buttons and footer. Grid builds the hero and the cards.</p>
+          </article>
+          <article class="skill">
+            <h3>Media queries</h3>
+            <p>The layout starts small and grows. On narrow screens the menu collapses into a button.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER: social links -->
+   <footer class="site-footer" id="contact">
+    <div class="container footer-inner">
+      <p class="footer-note">&copy; 2026 Lisa Shree. Built with HTML &amp; CSS.</p>
+      <ul class="social">
+        <li><a href="https://github.com/Lisashree" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com.lisashree" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:lisashree1115@gmail.com.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>
+
+
